@@ -11,6 +11,22 @@
 
 </head>
 <body >
+<%--
+MVC Model(DTO,VO,DAO,Service)  Java코드로 응용허는 부분
+    View(jsp,html) 보여자는 부분. view안에서는 되도록 javaCode 비권장 한다. 어쩔 수 없이 javaCode 사용 할 때는 el, jstl을 권장한다
+    실제로 MVC에서 MV는 Model(로직 부분)과 View(다자인)를 말한다.
+    Model과 View를 같이 사용하는 모델을 모델1이라 한다. (엣날방식)
+    Model(로직)하고 View(디자인)를 분리하는 방식을 모델2(mvc)방식 이라고 한다.
+    그래서 Controller가 필요함.
+    합쳐서 MVC라고 함. MVC가 나온 목적은 Model과 View를 분리 할 목적으로 나옴.
+
+    MVC의 선수 학습은 기본적으로 redirect/forword입니다.
+    View에서 어쩔 수 없이 들어가는 JavaCode 부분은 EL,JSTL로 대체한다.
+--%>
+
+
+
+
 ${arraylist}
 <div id="wrapper">
     <div id="header">

@@ -20,6 +20,11 @@ public class ActionFactory {
         }else if(cmd.equals("list")) {//*.do라는  url이면 getAction이 불려진다
             //new ListAction생성할때.. path,redirect는 ActionForward로 저장해서 return
             action = new ListAction("view/mvclist.jsp",false);
+        }//mvclogin.jsp를  forward해서 화면을 보여주기
+        else if(cmd.equals("loginui")) {
+            action=new UiAction("view/mvclogin.jsp",false);
+        }else if(cmd.equals("loginprocess")) {
+            action=new LoginProcessAction("list.do?cmd=list",true);
         }
         return action;
     }

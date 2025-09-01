@@ -13,14 +13,20 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
     <script>
-        $(function (){
-            alert('Hello JQuery JS!');
+        $(function(){
+            $("img#btnSubmit").click(function(){
+                //id pasword 부분을 체크하세요......
+                $("form").submit();
+            });
+
         });
     </script>
+
     <link href="../css/contents.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<form name="login" method="post" >
+${pageContext.request.contextPath}
+<form name="login" method="post"  action="${pageContext.request.contextPath}/loginprocess.do?cmd=loginprocess">
     <div id="loginWrapper">
         <div class="loginForm">
             <fieldset>
@@ -30,10 +36,10 @@
                     <dd><input type="text" name="id" class="text" id="user_id" /></dd>
 
                     <dt><img src="../img/common/th_pw.gif" alt="비밀번호" /></dt>
-                    <dd><input type="password" name="pass" class="text" id="user_passwd" /></dd>
+                    <dd><input type="password" name="password" class="text" id="user_passwd" /></dd>
                 </dl>
                 <div class="btn">
-                    <img onclick="loginCheck()" id="btnSubmit" src="../img/button/btn_login.gif" alt="LOGIN" title="LOGIN"  />
+                    <img  id="btnSubmit" src="../img/button/btn_login.gif" alt="LOGIN" title="LOGIN"  />
                 </div>
 
                 <div class="saveId"><input type="checkbox" id="checker" name="checker" />

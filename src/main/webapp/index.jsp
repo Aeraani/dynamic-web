@@ -31,5 +31,6 @@
  처음에는 직접 코드를 구현해서 응용히세요...
  --%>
 <a href="list.do?cmd=list">List</a><%-- 여기를 누르면 DispatcherSernlet의 service호출 --%>
+<a href="ui.do?cmd=loginui">Login</a>
 </body>
 </html>

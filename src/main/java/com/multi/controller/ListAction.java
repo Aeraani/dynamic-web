@@ -1,6 +1,8 @@
 
 package com.multi.controller;
 
+import com.multi.util.DBUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class ListAction  implements Action {
         //BL수행
         System.out.println("ListAction execute");
         request.setAttribute("arraylist","hello World");
+        System.out.println("connection="+ DBUtil.getConnection());
 
         return new ActionForWard(path, isRedirect);
     }

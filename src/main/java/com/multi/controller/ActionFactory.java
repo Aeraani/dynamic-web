@@ -16,8 +16,8 @@ public class ActionFactory {
         Action action = null;
         if(cmd.equals("write")) { //write.do?cmd=write
             action = new WriteAction("list.do?cmd=list",true);
-        }else if(cmd.equals("list")) {
-            action = new ListAction("view/mvclist.jsp",false);
+        }else if(cmd.equals("list")) { //*.do라는 url이면 getAction이 불려진다
+            action = new ListAction("view/mvclist.jsp",false); //new ListAction을 생성할 때 path,redirect는 ActiomForward로 저장해서 return
         }
         return action;
     }

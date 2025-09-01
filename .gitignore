@@ -5,6 +5,7 @@
 # Gradle
 .gradle/
 build/
+out/
 
 # OS
 .DS_Store

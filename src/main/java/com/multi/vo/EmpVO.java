@@ -1,5 +1,5 @@
 package com.multi.vo;
-//ctrl+shift+u 대소문자 변환
+//cttl+shift+u를 대소문자 변환
 public class EmpVO {
     private int empno;
     private String ename;

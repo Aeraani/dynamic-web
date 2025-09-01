@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -27,7 +28,8 @@ MVC Model(DTO,VO,DAO,Service)  Java코드로 응용허는 부분
 
 
 
-${arraylist}
+
+<%--달러 브레이스 리스트는 request.getAttribute("list") --%>
 <div id="wrapper">
     <div id="header">
         <div class="topInfoWrap">
@@ -58,10 +60,12 @@ ${arraylist}
                 <table class="bbsWrite mgb35">
                     <caption></caption>
                     <colgroup>
-                        <col width="95" />
-                        <col width="395" />
-                        <col width="95" />
-                        <col />
+                        <col width="30" />
+                        <col width="150" />
+                        <col width="150" />
+                        <col width="150" />
+                        <col width="150" />
+                        <col width="150" />
                     </colgroup>
                     <tbody>
                     <tr>
@@ -79,29 +83,34 @@ ${arraylist}
                 <table class="bbsList">
                     <colgroup>
                         <col width="30" />
-                        <col width="130" />
-                        <col />
+                        <col width="150" />
+                        <col width="150" />
+                        <col width="150" />
+                        <col width="150" />
                         <col width="150" />
                     </colgroup>
                     <thead>
                     <tr>
-                        <th scope="col" class="fir">NO.</th>
-                        <th scope="col">작성자(아이디)</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">등록일</th>
+                        <th scope="col" class="fir">NO</th>
+                        <th scope="col">EMPNO</th>
+                        <th scope="col">ENAME</th>
+                        <th scope="col">SAL</th>
+                        <th scope="col">JOB</th>
+                        <th scope="col">HIREDATE</th>
                     </tr>
                     </thead>
 
-                    <tbody>
-                    <tr>
-                        <td class="fir">1</td>
+                    <c:forEach var="i" items="${list}" varStatus="cnt">
+                        <tr>
+                            <td class="fir">${cnt.count}</td>
+                            <td>${i.empno}</td>
+                            <td class="tal">${i.ename}</a></td>
+                            <td>${i.sal}</td>
+                            <td>${i.job}</td>
+                            <td>${i.hiredate}</td>
 
-                        <td>관리자(utf-8)</td>
-                        <td class="tal"><a href="">Test</a></td>
-                        <td>2025-08-01</td>
-                    </tr>
-
-
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
 

@@ -1,5 +1,6 @@
 package com.multi.controller;
 
+//Mapper 역할을 수행합니다
 public class ActionFactory {
     private static ActionFactory actionFactory;
 

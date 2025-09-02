@@ -1,7 +1,7 @@
 
 package com.multi.dao;
 import com.multi.model.User;
-import com.multi.util.DBUtil;
+import com.multi.util.DBUtil2;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
         String sql = "INSERT INTO users (name, age) VALUES (?, ?)";
-        try (Connection conn = DBUtil.getConnection();
+        try (Connection conn = DBUtil2.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setInt(2, user.getAge());
@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(User user) {
         String sql = "UPDATE users SET name = ?, age = ? WHERE id = ?";
-        try (Connection conn = DBUtil.getConnection();
+        try (Connection conn = DBUtil2.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setInt(2, user.getAge());
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
-        try (Connection conn = DBUtil.getConnection();
+        try (Connection conn = DBUtil2.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
     public User getUser(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         User user = null;
-        try (Connection conn = DBUtil.getConnection();
+        try (Connection conn = DBUtil2.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -71,7 +71,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> getAllUsers() {
         String sql = "SELECT * FROM users";
         List<User> users = new ArrayList<>();
-        try (Connection conn = DBUtil.getConnection();
+        try (Connection conn = DBUtil2.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {

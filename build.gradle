@@ -22,13 +22,16 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+// 톰캣이 제공하므로 패키징하지 않도록 compileOnly
   compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
   implementation 'javax.servlet:jstl:1.2'
   implementation 'javax.servlet:javax.servlet-api:4.0.1' // 서블릿 필수
   implementation 'javax.el:javax.el-api:3.0.0' // Expression Language
   implementation 'org.glassfish:javax.el:3.0.0' // EL 구현체
   testImplementation 'junit:junit:4.13.2'
-  implementation 'mysql:mysql-connector-java:8.0.30' //jdbc드라이브 연결
+  implementation 'mysql:mysql-connector-java:8.0.30'//jdbc드라이브 연결
+  compileOnly 'org.projectlombok:lombok:1.18.26'
+  annotationProcessor 'org.projectlombok:lombok:1.18.26'
 }
 
 test {

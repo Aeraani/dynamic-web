@@ -15,6 +15,13 @@ mvc로 로그인을 하겠습니다
 */
 
 @WebServlet("*.do")//MVC에서 대장 Controller
+ /*
+ 1. 명령줄의 인수를 받는다 (cmd를 받음)
+ 2. 명령에 대한 Action을 생성한다
+ 3. 해당 Action으 호출한다(비즈니스 로직을 수행한다)
+ 4. Action을 수행하고 ActionForward를 return한다
+ 5. redirect or forward 여부에 따라서 페이지 이동한다
+ */
 public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

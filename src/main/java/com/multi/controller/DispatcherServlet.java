@@ -22,7 +22,7 @@ public class DispatcherServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         String cmd = request.getParameter("cmd");
         Action action=ActionFactory.getInstance().getAction(cmd);//UpCasting
-        ActionForWard actionForWard= action.execute(request, response);
+        ActionForward actionForWard= action.execute(request, response);
         if(actionForWard!=null){
             if(actionForWard.isRedirect()){//redirect (2번호출)
                 response.sendRedirect(actionForWard.getPath());

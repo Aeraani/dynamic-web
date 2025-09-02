@@ -30,8 +30,8 @@ public class UiAction  implements Action {
     }
 
     @Override
-    public ActionForWard execute(HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
         //login을 클릭했을 때.. mvclogin 화면을 forward로 보여준다
-        return new  ActionForWard(path, isRedirect);
+        return new ActionForward(path, isRedirect);
     }
 }

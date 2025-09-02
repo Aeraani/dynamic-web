@@ -13,9 +13,9 @@ public class WriteAction implements  Action {
     }
 
     @Override
-    public ActionForWard execute(HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
         //BL
         System.out.println("WriteAction execute");
-        return new ActionForWard(path, isRedirect);
+        return new ActionForward(path, isRedirect);
     }
 }

@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ListAction  implements Action {
@@ -22,7 +21,7 @@ public class ListAction  implements Action {
     }
 
     @Override
-    public ActionForWard execute(HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
         //BL수행
         System.out.println("ListAction execute");
         request.setAttribute("arraylist", "Hello World");
@@ -66,6 +65,6 @@ public class ListAction  implements Action {
         //empVOList를 list라는 이름으로 request에 저장을 해서 이동을 반드시 forward로 이동
         request.setAttribute("list", empVOList);
 
-        return new ActionForWard(path, isRedirect);
+        return new ActionForward(path, isRedirect);
     }
 }

@@ -6,15 +6,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginProcessAction implements  Action{
     private String path;
-    private boolean isRedirecct;
+    private boolean isRedirect;
 
-    public LoginProcessAction(String path, boolean isRedirecct) {
+    public LoginProcessAction(String path, boolean isRedirect) {
         this.path = path;
-        this.isRedirecct = isRedirecct;
+        this.isRedirect = isRedirect;
     }
 
     @Override
-    public ActionForWard execute(HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
         String id=request.getParameter("id");
         String password=request.getParameter("password");
         if(id.equals("admin")&&password.equals("1234")){//로그인 성공시....
@@ -27,6 +27,6 @@ public class LoginProcessAction implements  Action{
         }
 
 
-        return new  ActionForWard(path, isRedirecct);
+        return new ActionForward(path, isRedirect);
     }
 }

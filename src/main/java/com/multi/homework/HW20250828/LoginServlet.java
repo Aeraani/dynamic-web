@@ -1,4 +1,4 @@
-package com.multi;
+package com.multi.homework.HW20250828;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/me");
         }else{
             request.setAttribute("message","아이디/비밀번호 오류");
-//            request.getRequestDispatcher("/homework/20250828/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/homework/20250828/login.jsp").forward(request, response);
         }
     }
 }

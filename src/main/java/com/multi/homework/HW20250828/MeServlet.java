@@ -1,4 +1,4 @@
-package com.multi;
+package com.multi.homework.HW20250828;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

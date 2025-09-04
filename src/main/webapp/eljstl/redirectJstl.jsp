@@ -12,5 +12,7 @@
 </head>
 <body>
 <h1>REDIRECT</h1>
+<%=request.getAttribute("list")%>
+${list}
 </body>
 </html>

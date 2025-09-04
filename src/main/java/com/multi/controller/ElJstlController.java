@@ -3,6 +3,7 @@ package com.multi.controller;
 
 import com.multi.dao.BoardDAO;
 import com.multi.dto.BoardDTO;
+import com.multi.vo.UserVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,7 @@ public class ElJstlController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         BoardDAO boardDao=new BoardDAO();
+        UserVO userVO=new UserVO();
         if(action!=null&&action.equals("redirect")){
             req.setAttribute("list", boardDao.getAllBoards());
             resp.sendRedirect(req.getContextPath()+"/eljstl/redirectJstl.jsp");
@@ -29,6 +31,13 @@ public class ElJstlController extends HttpServlet {
         }else if(action!=null&&action.equals("info")){
             req.setAttribute("info", new BoardDTO(1,"hi", "hello",null,null));
             req.getRequestDispatcher("/eljstl/info.jsp").forward(req,resp);
+
+        }else if(action!=null&&action.equals("user")){
+            req.setAttribute("user", new UserVO(null,20));
+            req.getRequestDispatcher("/eljstl/elJstl2.jsp").forward(req,resp);
+
+        }else if(action!=null&&action.equals("calc")){
+            resp.sendRedirect(req.getContextPath()+"/eljstl/elJstl3.jsp");
         }
     }
 }

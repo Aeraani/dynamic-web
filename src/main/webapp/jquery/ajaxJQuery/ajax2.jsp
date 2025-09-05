@@ -19,7 +19,7 @@
 </head>
 <body>
 <h2>Striped Rows</h2>
-<div class="container" id>
+<div class="container" >
     <p>The .table-striped class adds zebra-stripes to a table:</p>
     <table class="table table-striped">
         <thead id="thead">

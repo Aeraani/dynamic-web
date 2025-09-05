@@ -1,34 +1,78 @@
+<%--<%@ page contentType="text/html; charset=UTF-8" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<!DOCTYPE html>--%>
+<%--<html>--%>
+<%--<head><meta charset="UTF-8"><title>회원가입</title></head>--%>
+<%--<body>--%>
+<%--<h2>회원가입</h2>--%>
+
+<%--<form method="post" action="${pageContext.request.contextPath}/member?action=signup">--%>
+<%--    <div>--%>
+<%--        <label>아이디</label>--%>
+<%--        <input type="text" name="username" required />--%>
+<%--    </div>--%>
+<%--    <div>--%>
+<%--        <label>비밀번호</label>--%>
+<%--        <input type="password" name="password" required />--%>
+<%--    </div>--%>
+<%--    <div>--%>
+<%--        <label>닉네임</label>--%>
+<%--        <input type="text" name="nickname" required />--%>
+<%--    </div>--%>
+<%--    <button type="submit">가입하기</button>--%>
+<%--</form>--%>
+
+<%--<c:if test="${not empty error}">--%>
+<%--    <p style="color:red">${error}</p>--%>
+<%--</c:if>--%>
+
+<%--<p>--%>
+<%--    이미 계정이 있나요?--%>
+<%--    <a href="${pageContext.request.contextPath}/member?action=loginForm">로그인</a>--%>
+<%--</p>--%>
+<%--</body>--%>
+<%--</html>--%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>회원가입</title></head>
+<html lang="en">
+<head>
+    <title>Signup</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 <body>
-<h2>회원가입</h2>
 
-<form method="post" action="${pageContext.request.contextPath}/member?action=signup">
-    <div>
-        <label>아이디</label>
-        <input type="text" name="username" required />
-    </div>
-    <div>
-        <label>비밀번호</label>
-        <input type="password" name="password" required />
-    </div>
-    <div>
-        <label>닉네임</label>
-        <input type="text" name="nickname" required />
-    </div>
-    <button type="submit">가입하기</button>
-</form>
+<div class="container">
+    <br>
+    <h2>회원가입</h2>
+    <form method="post" action="${pageContext.request.contextPath}/member?action=signup">
+        <div class="form-group">
+            <label for="id">아이디:</label>
+            <input  type="text" class="form-control" style="width: 300px" placeholder="Enter id" name="username" required >
+        </div>
+        <div class="form-group">
+            <label for="pwd">비밀번호:</label>
+            <input type="password" class="form-control" style="width: 300px" placeholder="Enter password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="pwd">닉네임:</label>
+            <input type="text" class="form-control" style="width: 300px" placeholder="Enter nickname" name="nickname" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Signup</button>
+    </form>
+    <c:if test="${not empty error}">
+        <p style="color:red">${error}</p>
+    </c:if>
+    <p>
+        이미 계정이 있나요?
+        <a href="${pageContext.request.contextPath}/member?action=loginForm">로그인</a>
+    </p>
+</div>
 
-<c:if test="${not empty error}">
-    <p style="color:red">${error}</p>
-</c:if>
-
-<p>
-    이미 계정이 있나요?
-    <a href="${pageContext.request.contextPath}/member?action=loginForm">로그인</a>
-</p>
 </body>
 </html>

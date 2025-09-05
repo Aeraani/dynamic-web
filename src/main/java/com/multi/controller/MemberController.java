@@ -114,7 +114,7 @@ public class MemberController extends HttpServlet {
         if (loginMember != null) {
             req.getSession().setAttribute("loginMember", loginMember);
             // 로그인 후 이동할 화면(예: 게시판 목록)
-            resp.sendRedirect(req.getContextPath() + "/member?action=editForm");
+            resp.sendRedirect(req.getContextPath() + "/board1?action=list");
         } else {
             req.setAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
             req.getRequestDispatcher("/WEB-INF/view/memberView/login.jsp").forward(req, resp);

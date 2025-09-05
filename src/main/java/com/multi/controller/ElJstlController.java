@@ -28,9 +28,9 @@ public class ElJstlController extends HttpServlet {
             req.setAttribute("list", boardDao.getAllBoards());
             req.getRequestDispatcher("/eljstl/forwardJstl.jsp").forward(req,resp);
 
-        }else if(action!=null&&action.equals("info")){
-            req.setAttribute("info", new BoardDTO(1,"hi", "hello",null,null));
-            req.getRequestDispatcher("/eljstl/info.jsp").forward(req,resp);
+//        }else if(action!=null&&action.equals("info")){
+//            req.setAttribute("info", new BoardDAO(1,"hi", "hello",null,null));
+//            req.getRequestDispatcher("/eljstl/info.jsp").forward(req,resp);
 
         }else if(action!=null&&action.equals("user")){
             req.setAttribute("user", new UserVO(null,20));
@@ -38,6 +38,9 @@ public class ElJstlController extends HttpServlet {
 
         }else if(action!=null&&action.equals("calc")){
             resp.sendRedirect(req.getContextPath()+"/eljstl/elJstl3.jsp");
+
+        }else if(action!=null&&action.equals("function")){
+            req.getRequestDispatcher("/eljstl/elJstl4.jsp").forward(req,resp);
         }
     }
 }

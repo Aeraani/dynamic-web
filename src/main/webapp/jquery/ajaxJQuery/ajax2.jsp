@@ -25,13 +25,8 @@
         <thead id="thead">
 
         </thead>
-        <tbody>
-<%--        <tr>--%>
-<%--            <td>${[data."no"}</td>--%>
-<%--            <td>${data."name"}</td>--%>
-<%--            <td>${data."age"}</td>--%>
-<%--            <td>${data."addr"}</td>--%>
-<%--        </tr>--%>
+        <tbody id="tbody">
+
         </tbody>
     </table>
 </div>
@@ -51,17 +46,24 @@
                 //console.log(data);
                 // console.log(data["no"]+" "+data["name"]+" "+ data["age"]+" "+data["addr"]);
                 $("#thead").html("");
+                $("#thead").append("<tr>");
                 for(var key in data){
                     for(var j in data[key]){
                         console.log(j);
+                        $("#thead tr").append("<td>"+j+"</td>"); //tr의 자식으로 td넣기..
                     }
+                    break;
                 }
-                // $.each(data,function(key,val){
-                //     console.log(key+" " +val);
-                //     for(var i in val){
-                //         console.log(val[i]);
-                //     }
-                // });
+                //$("#thead").append("<tr>");
+                $.each(data,function(key,val){
+                    //console.log(key+" " +val);
+                    $("#tbody").append("<tr>");
+                    for(var i in val){
+                        $("#tbody").append("<td>"+val[i]+"</td>");
+                        //console.log(val[i]+"test");
+                    }
+                    $("#tbody").append("</tr>");
+                });
             },
             error:function(data){//Ajax통신이 fail
                console.log(data);

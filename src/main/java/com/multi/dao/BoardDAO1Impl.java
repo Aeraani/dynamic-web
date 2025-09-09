@@ -151,33 +151,50 @@ public class BoardDAO1Impl implements BoardDAO1{
     @Override
     public List<Board> search(String type, String keyword, int page, int size) {
         String sql;
-        switch (type) {
-            case "title":
-                sql = "SELECT * FROM board WHERE title LIKE CONCAT('%', ?, '%') " +
-                        "ORDER BY created_at DESC LIMIT ? OFFSET ?";
-                break;
-            case "content":
-                sql = "SELECT * FROM board WHERE content LIKE CONCAT('%', ?, '%') " +
-                        "ORDER BY created_at DESC LIMIT ? OFFSET ?";
-                break;
-            case "writer":
-                sql = "SELECT b.* FROM board b JOIN member m ON b.writer_id=m.id " +
-                        "WHERE m.name LIKE CONCAT('%', ?, '%') " +
-                        "ORDER BY b.created_at DESC LIMIT ? OFFSET ?";
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid search type: " + type);
-        }
-
         List<Board> list = new ArrayList<>();
         int offset = (page - 1) * size;
 
-        try (Connection conn = DB.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection()) {
+            PreparedStatement pstmt;
 
-            pstmt.setString(1, keyword);
-            pstmt.setInt(2, size);
-            pstmt.setInt(3, offset);
+            switch (type) {
+                case "title":
+                    sql = "SELECT * FROM board WHERE title LIKE CONCAT('%', ?, '%') " +
+                            "ORDER BY created_at DESC LIMIT ? OFFSET ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, keyword);
+                    pstmt.setInt(2, size);   // LIMIT ? OFFSET ?  => size, offset 순서
+                    pstmt.setInt(3, offset);
+                    break;
+
+                case "content":
+                    sql = "SELECT * FROM board WHERE content LIKE CONCAT('%', ?, '%') " +
+                            "ORDER BY created_at DESC LIMIT ? OFFSET ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, keyword);
+                    pstmt.setInt(2, size);
+                    pstmt.setInt(3, offset);
+                    break;
+
+                case "writer":
+                    long writerId;
+                    try {
+                        writerId = Long.parseLong(keyword.trim());
+                    } catch (NumberFormatException e) {
+                        // 숫자가 아니면 결과 없음
+                        return java.util.Collections.emptyList();
+                    }
+                    sql = "SELECT * FROM board WHERE writer_id = ? " +
+                            "ORDER BY created_at DESC LIMIT ? OFFSET ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setLong(1, writerId);
+                    pstmt.setInt(2, size);
+                    pstmt.setInt(3, offset);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Invalid search type: " + type);
+            }
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -187,12 +204,10 @@ public class BoardDAO1Impl implements BoardDAO1{
                     board.setContent(rs.getString("content"));
                     board.setWriter_id(rs.getLong("writer_id"));
                     board.setView_cnt(rs.getInt("view_cnt"));
-
                     Timestamp c = rs.getTimestamp("created_at");
                     Timestamp u = rs.getTimestamp("updated_at");
                     board.setCreated_at(c != null ? c.toLocalDateTime() : null);
                     board.setUpdated_at(u != null ? u.toLocalDateTime() : null);
-
                     list.add(board);
                 }
             }
@@ -205,30 +220,41 @@ public class BoardDAO1Impl implements BoardDAO1{
     @Override
     public int countSearch(String type, String keyword) {
         String sql;
-        switch (type) {
-            case "title":
-                sql = "SELECT COUNT(*) FROM board WHERE title LIKE CONCAT('%', ?, '%')";
-                break;
-            case "content":
-                sql = "SELECT COUNT(*) FROM board WHERE content LIKE CONCAT('%', ?, '%')";
-                break;
-            case "writer":
-                sql = "SELECT COUNT(*) FROM board b JOIN member m ON b.writer_id=m.id " +
-                        "WHERE m.name LIKE CONCAT('%', ?, '%')";
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid search type: " + type);
-        }
 
-        try (Connection conn = DB.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DB.getConnection()) {
+            PreparedStatement pstmt;
 
-            pstmt.setString(1, keyword);
+            switch (type) {
+                case "title":
+                    sql = "SELECT COUNT(*) FROM board WHERE title LIKE CONCAT('%', ?, '%')";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, keyword);
+                    break;
+
+                case "content":
+                    sql = "SELECT COUNT(*) FROM board WHERE content LIKE CONCAT('%', ?, '%')";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, keyword);
+                    break;
+
+                case "writer":
+                    long writerId;
+                    try {
+                        writerId = Long.parseLong(keyword.trim());
+                    } catch (NumberFormatException e) {
+                        return 0;
+                    }
+                    sql = "SELECT COUNT(*) FROM board WHERE writer_id = ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setLong(1, writerId);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Invalid search type: " + type);
+            }
+
             try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                return 0;
+                return rs.next() ? rs.getInt(1) : 0;
             }
         } catch (SQLException e) {
             throw new RuntimeException("countSearch failed", e);

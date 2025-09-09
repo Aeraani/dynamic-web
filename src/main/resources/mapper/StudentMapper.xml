@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.univ.mapper.StudentMapper">
+<!--    private long id;-->
+<!--    private String studentNo;-->
+<!--    private String name;-->
+<!--    private String email;-->
+<!--    private String dept;-->
+<!--    private String createdAt;-->
+    <resultMap id="StudentMap" type="com.multi.univ.dto.Student">
+        <id property="id" column="id"/>
+        <result property="studentNo" column="student_no"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="dept" column="dept"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+
+    <select id="findAllStudent" resultMap="StudentMap">
+        select id, student_no, name, email, dept, created_at from student
+        <where>
+            <if test="studentNo != null and studentNo != ''">
+                student_no = #{studentNo}
+            </if>
+        </where>
+        order by id desc
+        limit #{size} offset #{offset}
+    </select>
+
+    <select id="countStudent" resultType="int">
+        select count(*) from student
+        <where>
+            <if test="studentNo != null and studentNo != ''">
+                student_no = #{studentNo}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByStudentId" resultMap="StudentMap">
+        SELECT id, student_no, name, email, dept, created_at from student
+        where id= #{id}
+    </select>
+
+
+    <insert id="insertStudent" parameterType="com.multi.univ.dto.Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student (student_no, name, email, dept)
+        values (#{studentNo}, #{name}, #{email}, #{dept})
+    </insert>
+
+    <update id="updateStudent" parameterType="com.multi.univ.dto.Student">
+        update student
+        <set>
+            <if test="studentNo != null and studentNo != ''">student_no = #{studentNo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="dept != null and dept != ''">dept = #{dept},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteStudent" parameterType="long">
+        delete from student
+        where id=#{id}
+    </delete>
+
+</mapper>

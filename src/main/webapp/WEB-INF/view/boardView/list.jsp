@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>BoardList</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -25,7 +25,8 @@
     <h2>게시글 목록</h2>
     <a href="${pageContext.request.contextPath}/board1?action=writeForm">글쓰기</a> |
     <a href="${pageContext.request.contextPath}/member?action=editForm">회원정보수정</a> |
-    <a href="${pageContext.request.contextPath}/member?action=logout">로그아웃</a>
+    <a href="${pageContext.request.contextPath}/member?action=logout">로그아웃</a> |
+    <a href="${pageContext.request.contextPath}/board1?action=search">검색🔍</a>
     <table class="table">
         <thead>
         <tr>

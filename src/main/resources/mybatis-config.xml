@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="db.properties"/>
+    <properties resource="db/dev.properties"/>
 
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
@@ -22,6 +22,9 @@
     </environments>
 
     <mappers>
-        <mapper resource="mybatis/mapper/BoardMapper.xml"/>
+        <mapper resource="mybatis.mapper/BoardMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/CourseMapper.xml"/>
+        <mapper resource="mapper/EnrollmentMapper.xml"/>
     </mappers>
 </configuration>

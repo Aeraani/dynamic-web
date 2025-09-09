@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>글 수정</title>
+    <title>BoardEdit</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>

@@ -1,12 +1,31 @@
-﻿# IntelliJ
-.idea/
-*.iml
+# --- 기본: 전부 무시 ---
+*
 
-# Gradle
-.gradle/
-build/
-out/
+# --- Git/빌드 스크립트/래퍼는 살리기 ---
+!.gitignore
+!build.gradle
+!settings.gradle
+!gradlew
+!gradlew.bat
+!gradle/
+!gradle/wrapper/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
-# OS
-.DS_Store
-Thumbs.db
+# --- 소스 루트 살리기 ---
+!src/
+!src/main/
+!src/main/java/
+!src/main/resources/
+
+# --- 과제 패키지(자바)만 살리기 ---
+!src/main/java/com/
+!src/main/java/com/multi/
+!src/main/java/com/multi/univ/**
+# ↑ 과제 자바파일이 다른 패키지면 여기 경로 조정
+
+# --- 과제 리소스만 살리기 ---
+!src/main/resources/db/**
+!src/main/resources/mapper/**
+!src/main/resources/db.properties
+!src/main/resources/mybatis-config.xml

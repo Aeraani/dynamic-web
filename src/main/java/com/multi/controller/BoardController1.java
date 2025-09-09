@@ -20,6 +20,7 @@ public class BoardController1 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
 
         if (action == null) {
@@ -150,7 +151,7 @@ public class BoardController1 extends HttpServlet {
         if (keyword == null) keyword = "";
         keyword = keyword.trim();
 
-        // page 처리 (헬퍼 없이)
+        // page 처리
         int page = 1;
         String pageParam = req.getParameter("page");
         if (pageParam != null) {
@@ -164,6 +165,17 @@ public class BoardController1 extends HttpServlet {
 
         int size = 10; // 고정
 
+        if (keyword.isEmpty()) {
+            req.setAttribute("boards", java.util.Collections.emptyList());
+            req.setAttribute("type", type);
+            req.setAttribute("keyword", keyword);
+            req.setAttribute("page", page);
+            req.setAttribute("size", size);
+            req.setAttribute("totalPages", 0);
+            req.getRequestDispatcher("/WEB-INF/view/boardView/search.jsp").forward(req, resp);
+            return;
+        }
+
         if (!"title".equals(type) && !"content".equals(type) && !"writer".equals(type)) {
             resp.sendError(400, "Invalid search type");
             return;
@@ -171,13 +183,14 @@ public class BoardController1 extends HttpServlet {
 
         List<Board> boards = boardService.search(type, keyword, page, size);
         int total = boardService.countSearch(type, keyword);
+        int totalPages = (int) Math.ceil((double) total / size);
 
         req.setAttribute("boards", boards);
         req.setAttribute("type", type);
         req.setAttribute("keyword", keyword);
         req.setAttribute("page", page);
         req.setAttribute("size", size);
-        req.setAttribute("total", total);
+        req.setAttribute("totalPages", totalPages);
         req.getRequestDispatcher("/WEB-INF/view/boardView/search.jsp").forward(req, resp);
 
     }
